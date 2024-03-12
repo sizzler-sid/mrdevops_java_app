@@ -8,7 +8,7 @@ pipeline{
         stage('Git Checkout'){
             steps{
                 gitCheckout(
-                    branch: "main"
+                    branch: "main",
                     url: "https://github.com/sizzler-sid/mrdevops_java_app.git"
                 )
             }
