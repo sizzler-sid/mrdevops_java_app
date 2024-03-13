@@ -99,7 +99,7 @@ pipeline{
                 }
              }
          }   
-        /* stage('Docker Image Cleanup : ECR '){
+         stage('Docker Image Cleanup : ECR '){
           when { expression {  params.action == 'create' } }
              steps{
                 script{
@@ -107,6 +107,6 @@ pipeline{
                     dockerImageCleanup("${params.aws_account_id}","${params.Region}","${params.ECR_REPO_NAME}")
                 }
              }
-         } */  
+         }
     }
 }
