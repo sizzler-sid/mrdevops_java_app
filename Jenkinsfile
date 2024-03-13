@@ -39,6 +39,26 @@ pipeline{
                    mvnIntegrationTest()
                }
             }
+        } 
+		stage('Static code analysis: Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   def SonarQubecredentialsId = 'sonar-api'
+                   statiCodeAnalysis(SonarQubecredentialsId)
+               }
+            }
+        }
+        stage('Quality Gate Status Check : Sonarqube'){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   def SonarQubecredentialsId = 'sonar-api'
+                   QualityGateStatus(SonarQubecredentialsId)
+               }
+            }
         } */
         stage('Maven Build : maven'){
          when { expression {  params.action == 'create' } }
@@ -76,7 +96,7 @@ pipeline{
                }
             }
         }
-		stage('Docker Image Cleanup : DockerHub '){
+		/* stage('Docker Image Cleanup : DockerHub '){
          when { expression {  params.action == 'create' } }
             steps{
                script{
@@ -84,7 +104,7 @@ pipeline{
                    dockerImageCleanup("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
                }
             }
-        }  
+        }  */
     }
 
 }
